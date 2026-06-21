@@ -4,47 +4,65 @@ html(lang="en")
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     meta(name="robots" content="noindex, nofollow")
-    title Onisad Sales Assistant
+    title Sales Agent
     link(rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📷</text></svg>")
     link(rel="stylesheet" href="/css/style.css")
 
-    body
-      .container
-        include partials/header
-        
-        .content
-          .connection-alert#connectionAlert(role="alert" style="display: none;")
-            .connection-alert-inner
-              span.connection-alert-icon
-              p.connection-alert-text#connectionAlertText
-              button.btn.btn-sm.connection-alert-retry#connectionAlertRetry(type="button") Retry connection
-          include partials/camera
-          include partials/product-title
-          
-          // Identify Product Button (visible before identification starts)
-          .product-identification-start#productIdentificationStart
-            button.btn.btn-primary#identifyProduct(disabled) Identify Product
-          
-          include partials/hints
-          include partials/queue
-          include partials/loading
-          include partials/logs
-        
-        .results#results
-          include partials/results-camera
-          include partials/product-identification
-          include partials/pricing
-          include partials/sales-text
-          include partials/email-confirmation
-          include partials/item-created
-        
-        // Generate Pricing button (moved below results - now handled in product-identification.pug)
+  body
+    .container
+      header.header
+        h1 Sales Agent
+        p Photograph an item — the AI creates the listing.
+        .status-indicators
+          span#lmStatus 🔄 Checking AI...
+          span#dbStatus 🔄 Checking DB...
+          if salesSiteUrl && salesSiteUrl.length > 0
+            a.header-sales-link(href=salesSiteUrl target="_blank" rel="noopener noreferrer") Open Sales Site →
 
+      main.content
+        //- Camera
+        .camera-section
+          .camera-container#cameraContainer
+            .camera-placeholder#cameraPlaceholder
+              i 📷
+              p Tap to start camera
+              p.small-text Camera not working? Use Upload Photo below.
+            video#video(autoplay playsinline)
+            canvas#canvas
+          .camera-buttons
+            button.btn.btn-primary#startCamera Start Camera
+            button.btn.btn-secondary#capturePhoto(disabled) Take Photo
+            button.btn.btn-secondary#uploadPhoto Upload Photo
+            input.file-input#fileInput(type="file" accept="image/*")
 
-    script(src='/js/utils.js')
-    script(src='/js/queue.js')
-    script(src='/js/camera.js')
-    script(src='/js/product-identification.js')
-    script(src='/js/pricing.js')
-    script(src='/js/sales-text.js')
-    script(src='/js/main.js') 
+        //- Optional hint
+        .hint-section
+          input.hint-input#hintInput(
+            type="text"
+            placeholder="Optional hint — e.g. 'board game', 'iPhone 13 Pro'"
+          )
+
+        //- Single action button
+        .action-row
+          button.btn.btn-primary.btn-large#createListingBtn(disabled) Create Listing
+
+        //- Agent activity panel (shown once a run starts)
+        .agent-panel#agentPanel
+          .agent-panel-header
+            span.agent-spinner#agentSpinner
+            span#agentStatus Starting...
+
+          .agent-log#agentLog
+
+          .agent-result#agentResult
+            .result-icon ✅
+            h3#resultTitle
+            p#resultPrice
+            .result-sales-text#resultSalesText
+
+          .agent-error#agentError
+
+        //- Start over
+        button.btn.btn-secondary.btn-reset#resetBtn(style="display:none") 🔄 Start Over
+
+    script(src='/js/app.js')
