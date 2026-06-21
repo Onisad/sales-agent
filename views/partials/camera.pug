@@ -1,0 +1,15 @@
+.camera-section
+  .camera-container#cameraContainer
+    .camera-placeholder#cameraPlaceholder
+      i 📷
+      p Tap to start camera
+      p.small-text If camera doesn't work, use "Upload Photo" instead
+    video#video(autoplay playsinline)
+    canvas#canvas
+  
+  .camera-buttons
+    button.btn.btn-primary#startCamera Start Camera
+    button.btn.btn-secondary#capturePhoto(disabled) Take Photo
+    button.btn.btn-secondary#uploadPhoto Upload Photo
+    input.file-input#fileInput(type="file" accept="image/*")
+

@@ -1,0 +1,60 @@
+.result-section#productIdentificationSection
+  h3 🎯 Product Identification
+  
+  // Product Selection/Entry Section
+  .product-entry#productEntrySection
+    h4#confirmProductNameHeading 📝 Confirm Product Name
+    
+    // Product Selection (shown when candidates available)
+    .product-selection#productSelectionSection
+      p Select from detected products:
+      .product-candidates#productCandidates
+      .product-selection-actions
+        button.btn.btn-primary#confirmProductBtn(disabled) Confirm Selection
+        button.btn.btn-secondary#useManualEntryBtn Use Manual Entry Instead
+      
+      // Parallel Assessments Display (within product selection)
+      .parallel-assessments
+        // Vision Model Assessment (First)
+        .assessment-column
+          details#visionModelExpando
+            summary 🤖 Vision Model Assessment
+            .vision-model-results
+              pre#analysisText
+        
+        // Google Vision API Assessment (Second)
+        .assessment-column
+          details#googleVisionExpando
+            summary 🔍 Google Vision API Assessment
+            .vision-api-results
+              p#googleVisionLabel
+              p#googleVisionConfidence
+              p#detectedObjects
+              p#similarProducts
+              p#dominantColors
+              pre#googleVisionSummary
+              details#webDetectionExpando
+                summary Web Detection Results
+                div#webBestGuess
+                div#webPages
+                div#webSimilarImages
+    
+    // Manual Entry (always available, shown if no candidates or user chooses)
+    .product-manual-entry#productManualEntrySection
+      label Product Name:
+      input#confirmedProductName(type="text" placeholder="Enter product name...")
+      label Additional Notes (optional):
+      textarea#confirmedProductNotes(placeholder="Any additional notes about the product...")
+  
+  // Generate Pricing & Sales Text button (at the end of product identification section)
+  .product-actions#productActionsSection
+    button.btn.btn-success#completeAnalysis Generate Pricing & Sales Text
+  
+  // Legacy expandable sections (kept for compatibility)
+  details#productIdentificationDetails
+    summary Google Vision API Results
+    p#googleVisionLabelLegacy
+  details#detailedAnalysisExpando
+    summary Detailed Analysis
+    pre#analysisTextLegacy
+

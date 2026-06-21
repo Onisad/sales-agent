@@ -1,0 +1,35 @@
+.queue-section#queueSection
+  .queue-header
+    h3 🔁 Queue Mode (Beta)
+    span.queue-status-badge#queueStatusBadge Idle
+
+  .queue-batch-drop#queueBatchDrop
+    input.queue-batch-input#queueBatchInput(type="file" accept="image/*" multiple)
+    .queue-batch-inner
+      span.queue-batch-icon 📷
+      p.queue-batch-text Drop photos here or
+      button.btn.btn-secondary.btn-sm.queue-batch-browse#queueBatchBrowse(type="button") Browse…
+      p.queue-batch-hint Each photo is queued and processed automatically.
+
+  p.queue-description
+    | Capture multiple photos back-to-back. We'll identify each item, generate pricing & sales text automatically, and pause before publishing so you can review the final reasoning.
+
+  .queue-toggle
+    label.queue-switch
+      input#queueModeToggle(type="checkbox")
+      span.slider
+    span Enable queue capture mode
+
+  .queue-controls
+    button.btn.btn-secondary#queueProcessBtn(disabled) Start Processing
+    button.btn.btn-secondary#queueClearBtn(disabled) Clear Queue
+
+  .queue-stats#queueStatsRow
+    span#queuePendingStat Pending: 0
+    span#queueProcessingStat Processing: 0
+    span#queueReadyStat Ready for review: 0
+    span#queueFailedStat Failed: 0
+
+  .queue-items#queueItems
+    .queue-empty#queueEmptyState
+      p Queue is empty. Capture a photo with queue mode enabled or drop photos above to add items.

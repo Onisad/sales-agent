@@ -1,0 +1,4 @@
+---
+alwaysApply: true
+---
+The server is running at https://localhost:3003 so you can test against it there, or if you need a new instance, start it with another port.
